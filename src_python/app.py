@@ -11,6 +11,20 @@ def bot():
     resp = MessagingResponse()
     msg = resp.message()
     responded = False
+    phone_number = request.values.get('From').split(':')[1]
+    response_message = getResponseMessage(phone_number, incoming_msg)
+    msg.body(response_message)
+
+
+
+
+'''
+@app.route("/bot", methods=['POST'])
+def bot():
+    incoming_msg = request.values.get('Body', '').lower()
+    resp = MessagingResponse()
+    msg = resp.message()
+    responded = False
     if 'quote' in incoming_msg:
         # return a quote
         r = requests.get('https://api.quotable.io/random')
@@ -28,7 +42,7 @@ def bot():
     if not responded:
         msg.body('I only know about famous quotes and cats, sorry!')
     return str(resp)
-
+'''
 
 if __name__ == '__main__':
     app.run()
