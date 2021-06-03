@@ -12,8 +12,9 @@ def bot():
     msg = resp.message()
     responded = False
     phone_number = request.values.get('From').split(':')[1]
-    response_message = getResponseMessage(phone_number, incoming_msg)
-    msg.body(response_message)
+    #response_message = getResponseMessage(phone_number, incoming_msg)
+    msg.body(phone_number)
+    return str(resp)
 
 
 
