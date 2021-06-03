@@ -1,7 +1,6 @@
 from globals import *
 from utils.singleton import Singleton
 from conversation import Conversation
-from collections import defaultdict
 
 
 class ConversationManager(metaclass=Singleton):
@@ -30,6 +29,8 @@ class ConversationManager(metaclass=Singleton):
         else:
             raise PhoneNotExistsError("Phone not found")
 
+
+main_conversation_manager = ConversationManager()
 
 if __name__ == '__main__':
     cm = ConversationManager()

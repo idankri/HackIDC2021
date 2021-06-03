@@ -32,8 +32,14 @@ class Question:
     def get_message(self) -> str:
         return self.message_to_user
 
+    def bump_question(self):
+        return self.get_next_question_id("")
+
     def get_invalid_message(self) -> str:
         return self.invalid_message
 
     def update_user_data(self, user_answer : str, user_data) -> None:
         user_data.set(self.type, user_answer)
+
+    def get_answer_flag(self):
+        return self.answer_flag

@@ -13,6 +13,10 @@ class Conversation:
             self.m_cur_question = main_question_pool.get(
                 self.m_cur_question).process_answer(message, self.m_user_data)
             yield main_question_pool.get(self.m_cur_question).get_message()
+
+            while not main_question_pool.get(self.m_cur_question).get_answer_flag():
+                self.m_cur_question = main_question_pool.get(self.m_cur_question).bump_question()
+                yield main_question_pool.get(self.m_cur_question).get_message()
         except InvalidMessageError:
             yield main_question_pool.get(self.m_cur_question).get_invalid_message()
 
