@@ -2,8 +2,8 @@ from globals import *
 
 
 class Question:
-    def __init__(self, type_of_item, message_to_user, invalid_message, answer_validation_function, get_next_question_id,
-                 answer_flag, image_flag):
+    def __init__(self, type_of_item=None, message_to_user=None, invalid_message=None, answer_validation_function=None, get_next_question_id=None,
+                 answer_flag=None, image_flag=None):
         self.type = type_of_item
         self.message_to_user = message_to_user
         self.invalid_message = invalid_message
