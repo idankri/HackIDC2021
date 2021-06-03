@@ -11,5 +11,8 @@
     "url": "."
   },
   "author": "Idank",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.53.0"
+  }
 }
