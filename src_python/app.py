@@ -1,8 +1,14 @@
 from flask import Flask, request
 import requests
 from twilio.twiml.messaging_response import MessagingResponse
+from twilio.rest import TwilioRestClient
+from conversation_manager import main_conversation_manager
 
 app = Flask(__name__)
+
+ACCOUNT_SID = "AC6bb703567bab46b4b8c2dff452892fb5"
+AUTH_TOKEN = "5db8253e5a4f855a90051e4874479661"
+TWILIO_NUMBER = "+14155238886"
 
 
 @app.route("/bot", methods=['POST'])
@@ -12,11 +18,23 @@ def bot():
     msg = resp.message()
     responded = False
     phone_number = request.values.get('From').split(':')[1]
-    response_message = getResponseMessage(phone_number, incoming_msg)
-    msg.body(response_message)
+    response_messages = main_conversation_manager.process_message(phone_number, incoming_msg)
+
+    first = True
+    for response_message in response_messages:
+        if first:
+            msg.body(response_message)
+            first = False
+        else:
+            sendMessage(response_message, phone_number)
 
 
-
+def sendMessage(text, number):
+    client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
+    client.messages.create(
+        number,
+        TWILIO_NUMBER,
+        text)
 
 '''
 @app.route("/bot", methods=['POST'])
