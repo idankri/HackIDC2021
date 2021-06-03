@@ -1,3 +1,6 @@
+from globals import *
+
+
 class Question:
     def __init__(self, type_of_item, message_to_user, invalid_message, answer_validation_function, get_next_question_id,
                  answer_flag, image_flag):
@@ -10,12 +13,15 @@ class Question:
         self.image_flag = image_flag
 
     def process_answer(self, user_answer : str, user_data) -> int:
-        if self.answer_validation_function():
-            self.update_user_data(user_answer, user_data)
-            return self.get_next_question_id(user_answer)
-        return -1
+        if not self.answer_flag or not self.answer_validation_function():
+            raise InvalidMessageError()
+        self.update_user_data(user_answer, user_data)
+        return self.get_next_question_id(user_answer)
 
-    #def process_image(self, user_image):
+    def process_image(self, user_image):
+        if not self.image_flag:
+            raise InvalidMessageError()
+
     def get_message(self) -> str:
         return self.message_to_user
 
