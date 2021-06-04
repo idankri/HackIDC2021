@@ -38,6 +38,8 @@ if __name__ == '__main__':
         print(message)
     for message in cm.process_message("123456", "יניב"):
         print(message)
+    for message in cm.process_message("123456", "30"):
+        print(message)
     a = 1
 
 
