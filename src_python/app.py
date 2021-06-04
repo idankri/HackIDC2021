@@ -1,14 +1,14 @@
 from flask import Flask, request
 import requests
 from twilio.twiml.messaging_response import MessagingResponse
-from twilio.rest import TwilioRestClient
+from twilio.rest import Client
 from conversation_manager import main_conversation_manager
 
 app = Flask(__name__)
 
-ACCOUNT_SID = "AC6bb703567bab46b4b8c2dff452892fb5"
-AUTH_TOKEN = "5db8253e5a4f855a90051e4874479661"
 TWILIO_NUMBER = "+14155238886"
+account_sid = 'AC6bb703567bab46b4b8c2dff452892fb5'
+auth_token = '86add94c5884e3dcef8298494dca251b'
 
 
 @app.route("/bot", methods=['POST'])
@@ -22,15 +22,21 @@ def bot():
 
     first = True
     for response_message in response_messages:
-        msg.body(response_message)
+        if response_message is None or "https" in response_message:
+            continue
+        sendMessage(response_message, phone_number)
     return str(resp)
 
 def sendMessage(text, number):
-    client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
-    client.messages.create(
-        number,
-        TWILIO_NUMBER,
-        text)
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+        from_='whatsapp:+14155238886',
+        body=text,
+        to=f'whatsapp:{number}'
+    )
+    print(message.sid)
+
 
 '''
 @app.route("/bot", methods=['POST'])
