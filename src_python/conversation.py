@@ -21,6 +21,7 @@ class Conversation:
             yield main_question_pool.get(self.m_cur_question).get_invalid_message()
 
     def process_image(self, image_data):
+        # Should be whitened here
         try:
             self.m_cur_question = main_question_pool.get(
                 self.m_cur_question).process_image(image_data, self.m_user_data)
