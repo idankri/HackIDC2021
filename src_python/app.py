@@ -22,12 +22,8 @@ def bot():
 
     first = True
     for response_message in response_messages:
-        if first:
-            msg.body(response_message)
-            first = False
-        else:
-            sendMessage(response_message, phone_number)
-
+        msg.body(response_message)
+    return str(resp)
 
 def sendMessage(text, number):
     client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
