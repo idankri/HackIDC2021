@@ -15,15 +15,15 @@ class QuestionPool(metaclass=Singleton):
 
 main_question_pool = QuestionPool()
 
-# main_question_pool.add(Question(
-#     type_of_item=None,
-#     message_to_user="",
-#     invalid_message=None,
-#     answer_validation_function=lambda user_msg: True,
-#     get_next_question_id=lambda user_msg: 1,
-#     answer_flag=True,
-#     image_flag=False
-# ))
+main_question_pool.add(Question(
+    type_of_item=None,
+    message_to_user="",
+    invalid_message=None,
+    answer_validation_function=lambda user_msg: True,
+    get_next_question_id=lambda user_msg: 1,
+    answer_flag=True,
+    image_flag=False
+))
 
 # main_question_pool.add(Question(
 #     type_of_item=None,
@@ -62,7 +62,7 @@ main_question_pool.add(Question(
     message_to_user="קודם כל עם מי יש לי את הכבוד לדבר?",
     invalid_message=None,
     answer_validation_function=lambda user_msg: not user_msg.isdigit(),
-    get_next_question_id=lambda user_msg: 3,
+    get_next_question_id=lambda user_msg: 2,
     answer_flag=True,
     image_flag=False
 ))
